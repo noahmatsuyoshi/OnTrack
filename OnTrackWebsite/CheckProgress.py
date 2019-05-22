@@ -1,5 +1,4 @@
 import numpy
-from fpdf import FPDF
 import xlrd
 import os 
 
