@@ -12,7 +12,24 @@
 {% block content %}
     <div id="content">
         <div class="main">
-            <h1>{{results}}</h1>
+            {% for row in results %}
+                {% if row.0 == '*' %}
+                    <img src="/media/asIcon.png">
+                {% else %}
+                    <img src="/media/blankIcon.png">
+                {% endif %}
+                {% if row.1 == '*' %}
+                    <img src="/media/asIcon.png">
+                {% else %}
+                    <img src="/media/blankIcon.png">
+                {% endif %}
+                {% if row.2 == '*' %}
+                    <img src="/media/moreIcon.png">
+                {% else %}
+                    <img src="/media/blankIcon.png">
+                {% endif %}
+                <h1>{{r}}</h1>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

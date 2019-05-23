@@ -20,8 +20,14 @@ class CalculatePDFView(PDFTemplateView):
         GMFCSLevel = request.session.get('GMFCSLevel')
         age = request.session.get('age')
         scores = request.session.get('scores')
-        self.results = CheckProgress.performCalculation(GMFCSLevel, age, scores)
-        print(self.results)
+        progress = CheckProgress.performCalculation(GMFCSLevel, age, scores)
+        self.results = [
+            {
+                "progress": progress[0],
+                "title": "Balance",
+                "Description": "Early Clinical Assessment of Balance"
+            }
+        ]
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
