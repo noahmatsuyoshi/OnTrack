@@ -3,7 +3,21 @@ from django.http import HttpResponse
 import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
+from django.conf import settings
+from easy_pdf.views import PDFTemplateView
 
+class CalculatePDFView(PDFTemplateView):
+    #template_name = 'templates/OnTrackWebsite/calculate.html'
+    template_name = 'calculate.html'
+    #base_url = 'html://' + settings.BASE_DIR
+    download_filename = 'results.pdf'
+
+    def get_context_data(self, **kwargs):
+        return super(CalculatePDFView, self).get_context_data(
+            pagesize='A4',
+            title='Hi there!',
+            **kwargs
+        )
 
 #handling traffic on home page
 #loading template
