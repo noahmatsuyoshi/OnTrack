@@ -7,3 +7,12 @@ def home(request):
 
 def acknowledgements(request):
     return render(request, 'OnTrackWebsite/acknowledgements.html')
+
+def how_to_use_output(request):
+    return render(request, 'OnTrackWebsite/how_to_use_output.html')
+
+def how_it_calculates(request):
+    return render(request, 'OnTrackWebsite/how_it_calculates.html')
+
+def checkin(request):
+    return render(request, 'OnTrackWebsite/checkin.html')
