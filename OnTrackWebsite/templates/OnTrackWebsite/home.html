@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>OnTrack Home</h1>
-<p>Checking up and checking in to keep on track.</p>
+{% extends "OnTrackWebsite/base_template.html" %}
+{% block content %}
 <a href="/checkin/">Check In!</a>
 <br>
 <br>
 <br>
 <br>
-<br>
-<br>
-<li><a href="/acknowledgements/">acknowledgements</a></li>
-<li><a href="/how_it_calculates/">how it calculates</a></li>
-<li><a href="/how_to_use_output/">how to use the output information</a></li>
-</body>
-</html>
+<div class="navbar-nav">
+    <li><a href="/acknowledgements/">acknowledgements</a></li>
+    <li><a href="/how_it_calculates/">how it calculates</a></li>
+    <li><a href="/how_to_use_output/">how to use the output information</a></li>
+</div>
+{% endblock content %}

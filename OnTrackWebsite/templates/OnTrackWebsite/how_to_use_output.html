@@ -1,8 +1,39 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>OnTrack: how to use the output information</h1>
-<p>Checking up and checking in to keep on track.</p>
+{% extends "OnTrackWebsite/base_template.html" %}
+{% block content %}
 return <a href="/home/">Home</a>
-</body>
-</html>
+<br>
+<div class="col-md-10">
+        <br>
+        The On Track study longitudinal trajectories and reference percentiles fit nicely with the goals of regular check-ups and check-ins between children with cerebral palsy (CP) and their families and health care professionals. Use of the information assists with finding the balance between results of standardized assessments and individual priorities of families. 
+        <br>
+        <br>
+        The On Track Study (2012-2017) involved 708 children with CP and their families, therapists and researchers from across Canada and the United States. The On Track study monitoring system for children with CP gives us a framework for developmental assessment, monitoring and planning of individualized care. Check-ups and check-ins help us work toward the best possible program planning for children and families. Families and therapists can work together using the comprehensive On Track study monitoring system to evaluate:
+        <div class="container">
+            <li>Balance
+            <li>Strength
+            <li>Range of Motion
+            <li>Endurance
+            <li>Impact of Health Conditions Associated with CP on Daily Life
+            <li>Participation in Family and Recreational Activities
+            <li>Performance in Self-care Activities
+        </div>
+        <br>
+        <strong>Longitudinal trajectories</strong> provide useful tools for families and therapists to discuss questions about how well children are doing on a given measure in relationship to the average values of other children with CP of similar functional ability levels at a specific time. They yield information about the course of development for children within a Gross Motor Function Classification System (GMFCS) level including variability in the expected limit of the outcome and how long it takes to get there. Because of this variability, these trajectories can be used as a guide to support collaborative discussions with families regarding their children’s prognosis and to proactively plan services based on how we expect children to develop in the future.
+        <br>
+        <br>
+        <strong>Reference percentiles</strong> can help to track children’s performance and change across time by indicating how a child is progressing relative to peers of the same ability (GMFCS level) and of a similar age. A single assessment permits an understanding of a child’s individual strengths and limitations compared to children at the same GMFCS level. Specifically, the reference percentiles might be useful in flagging the outcome as a potential area for intervention or, conversely, maybe to indicate that, relative to peers, this is an area of strength and not an intervention focus.  However, some children and families may choose to take a ‘strengths-based approach’ and continue to focus on optimizing an area of strength.   Completing a second assessment later in time provides an understanding of change in abilities over time.  This comparison of percentiles allows therapists and families to determine if an individual child with CP is demonstrating scores that are progressing ‘as expected’, ‘more than expected,’ or ‘less than expected’ over time, depending on their functional ability levels.  Because percentiles represent a relative standing at a moment in time, decisions about services should be supplemented with an analysis of the child’s function via examination of raw scores and the context of the testing sessions (i.e. child’s cooperation with testing, environmental distractions, etc.). 
+        <br>
+        <br>Together, you can use these results in collaborative discussions with a family to:
+        <div class="container">
+            <li>RECORD a child’s current assessment scores and how the child is progressing in those areas, relative to what we might expect.
+            <li>DISCUSS a child’s strengths and important areas for improvement, and make notes to help individualize the child’s treatment plan.
+        </div>
+        <br>
+        For families who find it helpful, this type of developmental monitoring is a place to start the conversation about what we might expect to see based on assessments of children in similar functional levels of CP.
+</div>  
+<br>
+<br> 
+return <a href="/home/">Home</a>
+<br>
+<br>
+{% endblock content %}

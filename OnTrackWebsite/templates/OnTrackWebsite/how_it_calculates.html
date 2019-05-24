@@ -1,8 +1,34 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>OnTrack: how it calculates</h1>
-<p>Checking up and checking in to keep on track.</p>
+{% extends "OnTrackWebsite/base_template.html" %}
+{% block content %}
 return <a href="/home/">Home</a>
-</body>
-</html>
+<br>
+<div class="col-md-10">
+        <br>
+        <strong><u>Calculator</u></strong>
+        <li>Determines the percentile for two scores on the same measure taken about a year apart (within a 3 month window, i.e. scores that are 9-15 months apart).
+        <li>Determines the difference between these two percentiles, subtracting the first visit percentile from the second.
+        <li>Uses the 80% probability values to determine if the change is below the negative value or above the positive value (for ‘less’ or ‘more’ categories, respectively). If the change is between these values, the child is 'Progressing as Expected’. If the change falls exactly on the top or bottom value in the 80% probability range, it may be useful to note that the interpretation is 'Progressing as Expected' but borders on either 'Progressing Less than Expected' or 'Progressing More than Expected'.
+        <li>For all measures except the SAROMM and Child Health Conditions Questionnaire, higher scores are better.  For the SAROMM and Child Health measures, lower scores are better; this is taken into account when determining developmental change.
+        <br>
+        <br>
+        <strong><u>When the score falls between the tabled percentile values</u></strong>
+        <br>
+        <li>The calculator chooses the percentile that is at or below the score.
+        <br>
+        <br>
+        <strong><u>When the score corresponds to more than one percentile at a given time point</u></strong>
+        <li>If the score is at the lowest percentile end (floor): The calculator returns a range from the highest possible percentile down to the lowest possible percentile. For example: an 8 year old in GMFCS Level V with a score of 0.8 on the ECAB would be reported as ≤ 10th centile.
+        <li>If the score is at the highest percentile end (ceiling): It is reported as a range from the lowest possible percentile upwards. For example: an 8 year old in GMFCS Level I with a score of 100 on the ECAB would be reported as ≥ 35th centile. 
+        <li>If the score appears in multiple columns with no ceiling or floor effect: It is reported as the range of possible percentiles. Change is reported also as a range.
+        <br>
+        <br>
+        <strong><u>Limitations in Interpreting Developmental Progress</u></strong> 
+        <li>In cases where a score corresponds to more than one percentile, interpretation of change may be limited. It is possible to report a range of percentiles, which might cross boundaries of outcome categories. However, if both scores are at the floor or ceiling, we cannot be confident to make an interpretation about whether the child is 'Progressing as Expected’, ‘Progressing Less than Expected’ or ‘Progressing More than Expected’.  
+        <li>This process of determining status of change over time in terms of relative percentile standings uses a statistical definition of ‘'Progressing as Expected’, ‘Progressing Less than Expected’ or ‘Progressing More than Expected’, and should always be used in conjunction with a collaborative discussion with families and a clinical review of a child’s actual item scores to consider if the changes in scores over time are clinically or functionally significant. 
+        <br>
+        <br>
+</div>
+return <a href="/home/">Home</a>
+<br>
+<br>
+{% endblock content %}
