@@ -1,35 +1,111 @@
 
 
-{% block extra_style %}
-    <style type="text/css">
+<!-- {% block extra_style %} -->
+    <style>
         body {
             font-family: "Helvetica", "sans-serif";
-            color: #333333;
+            font-weight: 100;
+            line-height: 0px
         }
-    </style>
-{% endblock %}
+        h1.title {
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 30px;
+            margin-right: 5px
+        }
+        div.rowBox {
+            height: 30px;
+            width: 200px;
+        }
+        div.iconBox {
+            border: 1px solid black;
+            height: 20px;
+            width: 20px;
+        }
+        div.box {
+            padding: 5px 5px 5px 5px;
+        }
+        table {
+            border: 1px solid black;
+        }
+        th {
+            border: 1px solid black;
+            text-align: left;
+            height: 150px
+        }
+        td {
+            border: 1px solid black;
+            width: 50px;
+            vertical-align: top
+        }
+        tr {
+            height: 50px;
+        }
+        p.descriptionText {
+            font-weight: lighter;
+            font-size: 25px;
+            line-height: 0;
+            vertical-align: top
+        }
 
-{% block content %}
+    </style>
+<!-- {% endblock %} -->
+
+<!-- {% block content %} -->
     <div id="content">
         <div class="main">
-            {% for row in results %}
-                {% if row.0 == '*' %}
-                    <img src="/media/asIcon.png">
-                {% else %}
-                    <img src="/media/blankIcon.png">
-                {% endif %}
-                {% if row.1 == '*' %}
-                    <img src="/media/asIcon.png">
-                {% else %}
-                    <img src="/media/blankIcon.png">
-                {% endif %}
-                {% if row.2 == '*' %}
-                    <img src="/media/moreIcon.png">
-                {% else %}
-                    <img src="/media/blankIcon.png">
-                {% endif %}
-                <h1>{{r}}</h1>
-            {% endfor %}
+
+            <table>
+                <tr>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        <img src="/media/progressingLessText.PNG">
+                        
+                    </th>
+                    <th>
+                        <img src="/media/progressingAsText.PNG">
+                    </th>
+                    <th>
+                        <img src="/media/progressingMoreText.PNG">
+                    </th>
+                </tr>
+                {% for row in results %}
+                    <tr>
+                        <td style="width:250px;" >
+                                <h1 class="title">
+                                    {{ row.title }}
+                                </h1>
+                                {{ row.description }}
+                            
+                        </td>
+                        
+                        <td>
+                            {% if row.progress.0 == '*' %}
+                                <img src="/media/asIcon.png">
+                            {% else %}
+                                <img src="/media/blankIcon.png">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if row.progress.1 == '*' %}
+                                <img src="/media/asIcon.png">
+                            {% else %}
+                                <img src="/media/blankIcon.png">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if row.progress.2 == '*' %}
+                                <img src="/media/moreIcon.png">
+                            {% else %}
+                                <img src="/media/blankIcon.png">
+                            {% endif %}
+                        </td>
+                    </tr>
+                        
+                {% endfor %}
+            </table>
         </div>
     </div>
-{% endblock %}
+<!-- {% endblock %} -->
