@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,18 +17,68 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="{% static 'OnTrackWebsite/main.css' %}">
+
     {% if title %}
-        <title> OnTrack - {{ title }} </title>
+        <title> OnTrack  - {{ title }} </title>
     {% else %}
-        <title> OnTrack </title>
+        <title> OnTrack  </title>
     {% endif %}
 </head>
 <body>
-<h1>OnTrack {{ title }}</h1>
-<p>Checking up and checking in to keep on track.</p>
-<div class="container">
-    {% block content %}{% endblock %}
-</div>
+<p><strong>Checking up and checking in to keep on track.</strong></p>
+
+<header class="site-header">
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+
+      <div class="container">
+
+        <a class="navbar-brand mr-4" href="{% url 'OnTrack-home' %}">OnTrack {{title}}</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarToggle">
+
+          <div class="navbar-nav mr-auto">
+
+            <a class="nav-item nav-link" href="{% url 'OnTrack-home' %}">Home</a>
+
+            <a class="nav-item nav-link" href="{% url 'OnTrack-acknowledgements' %}">Acknowledgements</a>
+
+            <a class="nav-item nav-link" href="{% url 'OnTrack-how_to_use_output' %}">How to use output information</a>
+
+            <a class="nav-item nav-link" href="{% url 'OnTrack-how_it_calculates' %}">How it calculates</a>
+
+            <a class="nav-item nav-link" href="{% url 'OnTrack-checkin' %}">Check in</a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+  <main role="main" class="container">
+
+    <div class="row">
+
+      <div class="col-md-8">
+
+        {% block content %}{% endblock %}
+
+      </div>
+
+    </div>
+
+  </main>
  <!-- Optional JavaScript -->
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

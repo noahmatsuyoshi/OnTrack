@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .forms import Firstinput
 #handling traffic on home page
 #loading template
 def home(request):
@@ -14,5 +15,13 @@ def how_to_use_output(request):
 def how_it_calculates(request):
     return render(request, 'OnTrackWebsite/how_it_calculates.html', {'title': ': how it calculates'})
 
-def checkin(request):
-    return render(request, 'OnTrackWebsite/checkin.html', {'title': 'Check in!'})
+def checkin(request):   
+    
+    if request.method == 'POST':
+        form = Firstinput(request.POST)
+        if form.is_valid():
+            print (form.cleaned_data)
+    else:
+        form = Firstinput()
+    return render(request, 'OnTrackWebsite/checkin.html', {'title': 'Check in!', 'form' : form})
+
