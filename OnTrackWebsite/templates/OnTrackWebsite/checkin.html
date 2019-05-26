@@ -1,0 +1,46 @@
+
+{% extends "OnTrackWebsite/base_template.html" %}
+{% block content %}
+
+<form action="/checkin/" method="post">
+    {% csrf_token %}
+    <br>
+    <br>
+    <div class="container">
+        <center>Patient age: &#160; {{form.patient_age_yr}} &#160; [yr] &#160;
+        {{form.patient_age_mo}} &#160; [mo]
+        <br>
+        <br>
+        GMFCS level: &#160; {{form.GMFCS}}
+        <br>
+        <br>
+        <br>
+        <input type="submit" class="text-success" value= "Next step" ></center>
+    </div>
+</form>
+
+
+<!-- 
+
+
+<form action="/patient-age/" method="post">
+        
+        <br><label for="patient_age_yr"><strong>Patient age: </strong></label>
+        <input id="patient_age_yr" type="text" name="patient_age_yr" value="{{ current_age_yr }}">
+        <label for="patient_age_yr">(year)</label>
+        <input id="patient_age_mo" type="text" name="patient_age_mo" value="{{ current_age_mo }}">
+        <label for="patient_age_mo">(month)</label>
+        
+        <br><label for="GMFCS"><strong>GMFCS: </strong></label>
+        <input id="GMFCS" type="text" name="GMFCS" value="{{ current_GMFCS }}">
+        <br><div class="container">
+            <input type="submit" class="text-success" value= "Check in" >
+        </div>
+
+    </form> -->
+<br>
+<br>
+
+
+{% endblock content %}
+
