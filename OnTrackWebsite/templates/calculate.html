@@ -1,17 +1,18 @@
 
 
-<!-- {% block extra_style %} -->
+{% block extra_style %}
     <style>
         body {
             font-family: "Helvetica", "sans-serif";
-            font-weight: 100;
+            font-weight: 300;
             line-height: 0px
         }
         h1.title {
             font-weight: bold;
             font-family: 'Times New Roman', Times, serif;
-            font-size: 30px;
-            margin-right: 5px
+            font-size: 25px;
+            padding: 5px 5px 5px 5px;
+            line-height: 25px
         }
         div.rowBox {
             height: 30px;
@@ -28,74 +29,88 @@
         table {
             border: 1px solid black;
         }
-        th {
+        th.info {
             border: 1px solid black;
             text-align: left;
-            height: 150px
+            height: 100px
         }
-        td {
+        th.progress {
             border: 1px solid black;
-            width: 50px;
-            vertical-align: top
+            text-align: center;
+        }
+        td.title {
+            border: 1px solid black;
+            width: 300px;
+            height: 100px;
+            vertical-align: top;
+            line-height: 1;
+        }
+        td.icon {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            text-align: center;
         }
         tr {
-            height: 50px;
+            height: 100px;
         }
         p.descriptionText {
             font-weight: lighter;
-            font-size: 25px;
-            line-height: 0;
-            vertical-align: top
+            font-size: 14px;
+            line-height: 1;
+            vertical-align: top;
+            padding: 5px 5px 5px 5px;
+        }
+        img {
+            width: 60%
         }
 
     </style>
-<!-- {% endblock %} -->
+{% endblock %}
 
-<!-- {% block content %} -->
+{% block content %}
     <div id="content">
         <div class="main">
 
             <table>
                 <tr>
-                    <th>
+                    <th class="info">
                         
                     </th>
-                    <th>
+                    <th class="progress">
                         <img src="/media/progressingLessText.PNG">
-                        
                     </th>
-                    <th>
+                    <th class="progress">
                         <img src="/media/progressingAsText.PNG">
                     </th>
-                    <th>
+                    <th class="progress">
                         <img src="/media/progressingMoreText.PNG">
                     </th>
                 </tr>
                 {% for row in results %}
                     <tr>
-                        <td style="width:250px;" >
-                                <h1 class="title">
-                                    {{ row.title }}
-                                </h1>
-                                {{ row.description }}
-                            
+                        <td class="title" >
+                                <h1 class="title"> {{ row.title }} </h1>
+                                <p class="descriptionText"> {{ row.description }} </p>
                         </td>
                         
-                        <td>
+                        <td class="icon">
                             {% if row.progress.0 == '*' %}
-                                <img src="/media/asIcon.png">
+                                <img src="/media/lessIcon.png">
                             {% else %}
                                 <img src="/media/blankIcon.png">
                             {% endif %}
                         </td>
-                        <td>
+
+                        <td class="icon">
                             {% if row.progress.1 == '*' %}
                                 <img src="/media/asIcon.png">
                             {% else %}
                                 <img src="/media/blankIcon.png">
                             {% endif %}
                         </td>
-                        <td>
+                        <td class="icon">
                             {% if row.progress.2 == '*' %}
                                 <img src="/media/moreIcon.png">
                             {% else %}
@@ -108,4 +123,4 @@
             </table>
         </div>
     </div>
-<!-- {% endblock %} -->
+{% endblock %}

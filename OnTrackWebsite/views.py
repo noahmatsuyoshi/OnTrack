@@ -7,12 +7,11 @@ from wkhtmltopdf.views import PDFTemplateView
 from OnTrackWebsite.CheckProgress import CheckProgress
 from django.views.generic.base import TemplateView
 
-class CalculatePDFView(TemplateView):
+class CalculatePDFView(PDFTemplateView):
     #template_name = 'templates/OnTrackWebsite/calculate.html'
     template_name = 'calculate.html'
     #base_url = 'html://' + settings.BASE_DIR
-    download_filename = 'results.pdf'
-    filename = 'results.pdf'
+    filename = None
 
     def dispatch(self, request, *args, **kwargs):
         request.session['GMFCSLevel'] = CheckProgress.GMFCSLevel
