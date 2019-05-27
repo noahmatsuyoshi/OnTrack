@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import io
-from django.http import FileResponse
-from django.conf import settings
-from wkhtmltopdf.views import PDFTemplateView
-from OnTrackWebsite.CheckProgress import CheckProgress
-from django.views.generic.base import TemplateView
+from .forms import Firstinput
+from django.http import HttpResponseRedirect
+from .forms import Secondinput1
+from .forms import Secondinput2
+#handling traffic on home page
+#loading template
+def home(request):
+    return render(request, 'OnTrackWebsite/home.html', {'title': 'Home'})
 
 class CalculatePDFView(PDFTemplateView):
     #template_name = 'templates/OnTrackWebsite/calculate.html'
@@ -84,13 +86,48 @@ class CalculatePDFView(PDFTemplateView):
             pagesize='A4',
             results = self.results,
 
-            **kwargs
-        )
 
-#handling traffic on home page
-#loading template
-def home(request):
-    return render(request, 'OnTrackWebsite/home.html')
+def checkin(request):   
+    
+    if request.method == 'POST':
+        form = Firstinput(request.POST)
+        if form.is_valid():
+            print (form.cleaned_data)
+            request.session['GMFCSLevel'] = form.cleaned_data['GMFCS']
+            request.session['ageMonth'] = form.cleaned_data['patient_age_mo']
+            request.session['ageYear'] = form.cleaned_data['patient_age_yr']
+            if (form.cleaned_data['GMFCS'] == "I" or form.cleaned_data['GMFCS'] == "II" or form.cleaned_data['GMFCS'] == "III"):
+                return HttpResponseRedirect('/checkin1/')
+            else:
+                return HttpResponseRedirect('/checkin2/')     
+    else:
+        form = Firstinput()
+    return render(request, 'OnTrackWebsite/checkin.html', {'title': 'Check in!', 'form' : form})
 
-def acknowledgements(request):
-    return render(request, 'OnTrackWebsite/acknowledgements.html')
+
+def checkin1(request):
+    if request.method == 'POST':
+        form = Secondinput1(request.POST)
+        if form.is_valid():
+            request.session['scores'] = form.cleaned_data
+            print (form.cleaned_data)
+            #return HttpResponseRedirect('/thanks/')
+    else:
+        form = Secondinput1()
+    return render(request, 'OnTrackWebsite/checkin1.html', {'title': 'Check in!', 'form' : form})
+
+
+def checkin2(request):
+    if request.method == 'POST':
+        form = Secondinput2(request.POST)
+        if form.is_valid():
+            request.session['scores'] = form.cleaned_data
+            print (form.cleaned_data)
+            #return HttpResponseRedirect('/thanks/')
+    else:
+        form = Secondinput2()
+    return render(request, 'OnTrackWebsite/checkin2.html', {'title': 'Check in!', 'form' : form})
+
+
+
+

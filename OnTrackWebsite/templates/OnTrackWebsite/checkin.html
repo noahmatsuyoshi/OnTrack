@@ -7,15 +7,19 @@
     <br>
     <br>
     <div class="container">
-        <center>Patient age: &#160; {{form.patient_age_yr}} &#160; [yr] &#160;
-        {{form.patient_age_mo}} &#160; [mo]
+        <center>
+        <div style = "border: 1px solid black">
+            <br>
+            Patient age: &#160; {{form.patient_age_yr}} &#160; [yr] &#160;
+            {{form.patient_age_mo}} &#160; [mo]
+            <br>
+            <br>
+            GMFCS level: &#160; {{form.GMFCS}}
+            <br>
+            <br>
+        </div>
         <br>
-        <br>
-        GMFCS level: &#160; {{form.GMFCS}}
-        <br>
-        <br>
-        <br>
-        <input type="submit" class="text-success" value= "Next step" ></center>
+        <input type="submit" class="text-success" style="font-weight: bold" value= "Next step" ></center>
     </div>
 </form>
 
