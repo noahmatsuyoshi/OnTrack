@@ -86,11 +86,13 @@ class CheckProgress:
 
 
     # Inputs (Assume inputs are valid at this point, will handle validation in web form)
+    name = "Bobby Boy"
     GMFCSLevel = "I"
     age = [[3, 5], [4, 3]] # [[past year, past month], [current year, current month]]
     # Assign scores in this order: "ECAB", "SMWT", "SAROMM", "CEDLpar", "CEDLsc", "EASE", "FSA", "HEALTH", "GMFM"
     # With first element being past score and second current
     scores = [[80, 95], [1175, 2000], [1, 0.3], [55, 70], [35, 50], [3, 4], [2, 3], [1, 5], [22, 100]]
+    
 
     def performCalculation(GMFCSLevel, age, scores):
         GMFCSLevelInt = CheckProgress.romanNumeralMap.get(GMFCSLevel)
