@@ -6,8 +6,7 @@ from .forms import Secondinput1
 from .forms import Secondinput2
 #handling traffic on home page
 #loading template
-def home(request):
-    return render(request, 'OnTrackWebsite/home.html', {'title': 'Home'})
+
 import io
 from django.http import FileResponse
 from django.conf import settings
@@ -23,14 +22,16 @@ class CalculatePDFView(PDFTemplateView):
     filename = None
 
     def dispatch(self, request, *args, **kwargs):
-        request.session['name'] = CheckProgress.name
-        request.session['GMFCSLevel'] = CheckProgress.GMFCSLevel
-        request.session['age'] = CheckProgress.age
-        request.session['scores'] = CheckProgress.scores
-        self.name = request.session.get('name')
+        #request.session['name'] = CheckProgress.name
+        #request.session['GMFCSLevel'] = CheckProgress.GMFCSLevel
+        #request.session['age'] = CheckProgress.age
+        #request.session['scores'] = CheckProgress.scores
+        #self.name = request.session.get('name')
         self.GMFCSLevel = request.session.get('GMFCSLevel')
-        self.age = request.session.get('age')
+        self.ageYear = request.session.get('ageYear')
+        self.ageMonth = request.session.get('ageMonth')
         self.scores = request.session.get('scores')
+        print(self.scores)
         self.progress = CheckProgress.performCalculation(self.GMFCSLevel, self.age, self.scores)
         self.results = [
             {
@@ -140,6 +141,18 @@ def checkin2(request):
     else:
         form = Secondinput2()
     return render(request, 'OnTrackWebsite/checkin2.html', {'title': 'Check in!', 'form' : form})
+
+def home(request):
+    return render(request, 'OnTrackWebsite/home.html', {'title': 'Home'})
+
+def acknowledgements(request):
+    return render(request, 'OnTrackWebsite/acknowledgements.html', {'title': ': Acknowledgements'})
+
+def how_to_use_output(request):
+    return render(request, 'OnTrackWebsite/how_to_use_output.html', {'title': ': how to use the output information'})
+
+def how_it_calculates(request):
+    return render(request, 'OnTrackWebsite/how_it_calculates.html', {'title': ': how it calculates'})
 
 
 
