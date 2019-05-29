@@ -1,0 +1,115 @@
+
+{% extends "OnTrackWebsite/base_template.html" %}
+{% block content %}
+
+<form action="/checkin2/" method="post">
+    {% csrf_token %}
+    <br>
+    <br>
+    <div class="container">
+        <center>
+        <div style = "border: 1px solid black"><strong><font size="5">Balance</font></strong> 
+        <br> Early Clinical Assessment of Balance. Scored from 0 to 100 (higher score = better balance).
+        &#160; 
+        <br>
+        <br> past score: {{form.ECAB1}} &#160; current score: &#160; {{form.ECAB2}}
+        <br>
+        <br>
+        </div> 
+        <br>
+        <div style = "border: 1px solid black"><strong><font size="5"> Strength </font></strong> 
+            <br>Functional Strength Assessment. Scored from 1 to 5 (higher score = stronger).
+            &#160; 
+            <br>
+            <br> past score: {{form.FSA1}} &#160; current score: &#160; {{form.FSA2}}
+            <br>
+            <br>
+        </div>
+        <br>
+        <div style = "border: 1px solid black"><strong><font size="5">Range Of Motion</font></strong> 
+            <br>Spinal Alignment and Range of Motion Measure. Scored from 0 to 4 (lower score = fewer limitations).
+            &#160; 
+            <br>
+            <br> past score: {{form.SAROMM1}} &#160; current score: &#160; {{form.SAROMM2}}
+            <br>
+            <br>
+        </div> 
+        <br>
+        <div style = "border: 1px solid black"><strong><font size="5"> Endurance</font></strong> 
+            <br>Early Activity Scale for Endurance. Scored from 1 to 5 (higher score = more endurance). 
+            &#160; 
+            <br>
+            <br> past score: {{form.EASE1}} &#160; current score: &#160; {{form.EASE2}}
+            <br>
+            <br>
+        </div> 
+        <br>
+        <div style = "border: 1px solid black"><strong><font size="5"> Overall health </font></strong> 
+            <br>Child Health Conditions Questionnaire. Scored from 0 to 7 (lower score = better overall health).
+            &#160; 
+            <br>
+            <br> past score: {{form.HEALTH1}} &#160; current score: &#160; {{form.HEALTH2}}
+            <br>
+            <br>
+        </div>
+        <br>
+        <div style = "border: 1px solid black"><strong><font size="5">Participation in family and recreational activities </font></strong> 
+            <br>Child Engagement in Daily Life Measure. <br>Scored from 0 to 100 (higher score = more participation).
+            &#160; 
+            <br>
+            <br> past score: {{form.CEDLpar1}} &#160; current score: &#160; {{form.CEDLpar2}}
+            <br>
+            <br>
+        </div> 
+        <br>
+        <div style = "border: 1px solid black"><strong><font size="5">Performance in self-care activities</font></strong> 
+            <br>Child Engagement in Daily Life Measure. <br>Scored from 0 to 100 (higher score = needs less help).
+            &#160; 
+            <br>
+            <br> past score: {{form.CEDLsc1}} &#160; current score: &#160; {{form.CEDLsc2}}
+            <br>
+            <br>
+        </div> 
+        <br>
+        <div style = "border: 1px solid black"><strong><font size="5"> Gross motor function </font></strong> 
+            <br>Gross Motor Function Measure, Scored from 0 to 100 ( higher score = greater function).
+            &#160; 
+            <br>
+            <br> past score: {{form.GMFM1}} &#160; current score: &#160; {{form.GMFM2}}
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+        <br>
+        <input type="submit" class="text-success" style="font-weight: bold" value=  "Calculate!" ></center>
+    </div>
+</form>
+<br>
+<a href="/checkin/" class="text-danger" > Back </a>
+
+
+<!-- 
+
+
+<form action="/patient-age/" method="post">
+        
+        <br><label for="patient_age_yr"><strong>Patient age: </strong></label>
+        <input id="patient_age_yr" type="text" name="patient_age_yr" value="{{ current_age_yr }}">
+        <label for="patient_age_yr">(year)</label>
+        <input id="patient_age_mo" type="text" name="patient_age_mo" value="{{ current_age_mo }}">
+        <label for="patient_age_mo">(month)</label>
+        
+        <br><label for="GMFCS"><strong>GMFCS: </strong></label>
+        <input id="GMFCS" type="text" name="GMFCS" value="{{ current_GMFCS }}">
+        <br><div class="container">
+            <input type="submit" class="text-success" value= "Check in" >
+        </div>
+
+    </form> -->
+<br>
+<br>
+
+
+{% endblock content %}
+

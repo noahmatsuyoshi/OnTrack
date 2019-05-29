@@ -1,0 +1,151 @@
+
+
+{% block extra_style %}
+    <style>
+        body {
+            font-family: "Helvetica", "sans-serif";
+            font-weight: 300;
+            line-height: 0px
+        }
+        h1.title {
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 25px;
+            padding: 5px;
+            line-height: 26px
+        }
+        div.rowBox {
+            height: 30px;
+            width: 200px;
+        }
+        div.iconBox {
+            border: 1px solid black;
+            height: 20px;
+            width: 20px;
+        }
+        div.box {
+            padding: 5px 5px 5px 5px;
+        }
+        table {
+            border: 1px solid black;
+        }
+        th.info {
+            border: 1px solid black;
+            text-align: left;
+            height: 60px
+        }
+        th.progress {
+            border: 1px solid black;
+            text-align: center;
+        }
+        td.title {
+            border: 1px solid black;
+            width: 300px;
+            height: 100px;
+            vertical-align: top;
+            line-height: 1;
+        }
+        td.icon {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            text-align: center;
+        }
+        tr {
+            height: 100px;
+        }
+        p.descriptionText {
+            font-weight: lighter;
+            font-size: 14px;
+            line-height: 1;
+            vertical-align: top;
+            padding: 5px;
+        }
+        img {
+            width: 60%
+        }
+        img.progress {
+            width: 40%
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <div class="main">
+            <div style="width: 100%">
+                <h1 class="title" style="padding: 5px 5px 0px">
+                    CHECKING UP AND CHECKING IN TO KEEP ON TRACK
+                </h1>
+                <img src="/media/onTrackLogo.png" style="width: 10%; float:right;">
+            </div>
+            
+            <p class="descriptionText" style="padding: 0px 5px 5px">
+                The On Track study research results for children with cerebral palsy fit nicely with the goals of regular check-ups and check-ins between children with cerebral palsy and their families and therapists.  Check-ups and check-ins help to work toward the best possible development for you. Check-ins will help your therapist to understand your own priorities and concerns. The study results can be helpful for therapists to talk with you about how you are progressing since last time. Then, you can make a plan for moving forward together. 
+            </p>
+
+            <table>
+                <tr>
+                    <th class="info">
+                        <!-- <p class="descriptionText" style="padding: 5px 5px 0px"> Name: {{ name }} </p> -->
+                        <p class="descriptionText" style="padding: 0px 5px 0px"> Age: {{ age.1.0 }} years and {{ age.1.1 }} months </p>
+                        <p class="descriptionText" style="padding: 0px 5px 0px"> GMFCS: {{ GMFCSLevel }} </p>
+                        <p class="descriptionText" style="padding: 0px 5px 5px"> Date: {{ date.month }}/{{ date.day }}/{{ date.year }} </p>
+                    </th>
+                    <th class="progress">
+                        <img src="/media/progressingLessText.PNG" class="progress">
+                    </th>
+                    <th class="progress">
+                        <img src="/media/progressingAsText.PNG" class="progress">
+                    </th>
+                    <th class="progress">
+                        <img src="/media/progressingMoreText.PNG" class="progress">
+                    </th>
+                    <th class="info">
+                        <div style="height: 100%">
+                            <p class="descriptionText" style="position: relative;top: 5px"> What is important for you and your family? </p>
+                            <p class="descriptionText" style="position: relative;top: 50px"> Notes and Recommendations: </p>
+                        </div>
+                    </th>
+                </tr>
+                {% for row in results %}
+                    <tr>
+                        <td class="title" >
+                                <h1 class="title" style="padding: 5px 5px 0px"> {{ row.title }} </h1>
+                                <p class="descriptionText" style="padding: 0px 5px 5px"> {{ row.description }} </p>
+                        </td>
+                        
+                        <td class="icon">
+                            {% if row.progress.0 == '*' %}
+                                <img src="/media/lessIcon.png">
+                            {% else %}
+                                <img src="/media/blankIcon.png">
+                            {% endif %}
+                        </td>
+
+                        <td class="icon">
+                            {% if row.progress.1 == '*' %}
+                                <img src="/media/asIcon.png">
+                            {% else %}
+                                <img src="/media/blankIcon.png">
+                            {% endif %}
+                        </td>
+                        <td class="icon">
+                            {% if row.progress.2 == '*' %}
+                                <img src="/media/moreIcon.png">
+                            {% else %}
+                                <img src="/media/blankIcon.png">
+                            {% endif %}
+                        </td>
+                        <td class="title">
+
+                        </td>
+                    </tr>
+                        
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
