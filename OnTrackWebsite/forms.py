@@ -28,8 +28,10 @@ class Firstinput(forms.Form):
         (10, '10'),
         (11, '11'),
     )
-    patient_age_yr = forms.ChoiceField(choices=yearchoices)
-    patient_age_mo = forms.ChoiceField(choices=mochoices)
+    patient_age_yr1 = forms.ChoiceField(choices=yearchoices)
+    patient_age_mo1 = forms.ChoiceField(choices=mochoices)
+    patient_age_yr2 = forms.ChoiceField(choices=yearchoices)
+    patient_age_mo2 = forms.ChoiceField(choices=mochoices)
     GMFCS = forms.ChoiceField(choices=(('I', 'I'), ('II', 'II'), ('III', 'III'), ('IV', 'IV'), ('V', 'V')))
 
 class Secondinput1(forms.Form):
