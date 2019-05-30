@@ -108,8 +108,10 @@ def checkin(request):
         if form.is_valid():
             print (form.cleaned_data)
             request.session['GMFCSLevel'] = form.cleaned_data['GMFCS']
-            request.session['ageMonth'] = form.cleaned_data['patient_age_mo']
-            request.session['ageYear'] = form.cleaned_data['patient_age_yr']
+            request.session['previousageMonth'] = form.cleaned_data['patient_age_mo1']
+            request.session['previousageYear'] = form.cleaned_data['patient_age_yr1']
+            request.session['currentageMonth'] = form.cleaned_data['patient_age_mo2']
+            request.session['currentageYear'] = form.cleaned_data['patient_age_yr2']
             if (form.cleaned_data['GMFCS'] == "I" or form.cleaned_data['GMFCS'] == "II" or form.cleaned_data['GMFCS'] == "III"):
                 return HttpResponseRedirect('/checkin1/')
             else:
@@ -153,7 +155,3 @@ def how_to_use_output(request):
 
 def how_it_calculates(request):
     return render(request, 'OnTrackWebsite/how_it_calculates.html', {'title': ': how it calculates'})
-
-
-
-
