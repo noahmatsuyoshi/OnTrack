@@ -36,7 +36,7 @@ class Firstinput(forms.Form):
 
 class Secondinput1(forms.Form):
     ECAB1 = forms.FloatField(max_value=100, min_value=0, label='Balance past score:')
-    ECAB2 = forms.FloatField(max_value=5, min_value=1,label='Balance current score:')
+    ECAB2 = forms.FloatField(max_value=100, min_value=1,label='Balance current score:')
     SMWT1 = forms.FloatField(min_value= 0, max_value= 6000,label='Endurance (six minute walk) past score:')
     SMWT2 = forms.FloatField(min_value= 0,max_value=6000,label='Endurance (six minute walk) current score:')
     SAROMM1 = forms.FloatField(min_value= 0, max_value = 4, label='Range of motion past score:')

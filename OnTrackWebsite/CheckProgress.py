@@ -102,10 +102,11 @@ class CheckProgress:
         progress = CheckProgress.getProgress(GMFCSLevel, percentiles, centileChange) 
 
         # Reorder to match output in excel
+        scores = CheckProgress.changeArrayOrder(scores, CheckProgress.mapForOutput)
         progress = CheckProgress.changeArrayOrder(progress, CheckProgress.mapForOutput)
         percentiles = CheckProgress.changeArrayOrder(percentiles, CheckProgress.mapForOutput)
 
-        return progress
+        return {"progress": progress, "percentiles": percentiles, "scores": scores}
 
     # Takes age as input and returns row number to use for all tables
     def getRowNumFromAge(age):
@@ -192,7 +193,7 @@ class CheckProgress:
             maxDifference = currentPercentile.endRange - pastPercentile.startRange
             minDifference = currentPercentile.startRange - pastPercentile.endRange
             difference = [minDifference, maxDifference]
-
+            print(str(pastPercentile) + ", " + str(currentPercentile))
             centileChangeRow = CheckProgress.mapForDifferenceSheets.get(CheckProgress.testNamesForSheets[testIndex])
 
             thisProgress = []

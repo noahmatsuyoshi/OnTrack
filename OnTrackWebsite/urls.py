@@ -10,5 +10,5 @@ urlpatterns = [
     path('checkin/', views.checkin, name='OnTrack-checkin'),
     path('checkin1/', views.checkin1, name='OnTrack-checkin1'),
     path('checkin2/', views.checkin2, name='OnTrack-checkin2'),
-
+    path('results/', views.CalculatePDFView.as_view(), name='OnTrack-results')
 ]
