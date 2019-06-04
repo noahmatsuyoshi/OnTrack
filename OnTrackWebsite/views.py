@@ -14,6 +14,7 @@ from wkhtmltopdf.views import PDFTemplateView
 from OnTrackWebsite.CheckProgress import CheckProgress
 from django.views.generic.base import TemplateView
 import datetime
+import Graphs
 
 class CalculatePDFView(PDFTemplateView):
     #template_name = 'templates/OnTrackWebsite/calculate.html'
@@ -125,7 +126,6 @@ def checkin(request):
     if request.method == 'POST':
         form = Firstinput(request.POST)
         if form.is_valid():
-            print (form.cleaned_data)
             request.session['GMFCSLevel'] = form.cleaned_data['GMFCS']
             request.session['previousAgeMonth'] = form.cleaned_data['patient_age_mo1']
             request.session['previousAgeYear'] = form.cleaned_data['patient_age_yr1']
