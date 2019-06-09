@@ -98,8 +98,8 @@ class CheckProgress:
         GMFCSLevelInt = CheckProgress.romanNumeralMap.get(GMFCSLevel)
         centileChange = [CheckProgress.lowerCentileChangeSheet.col_slice(CheckProgress.centileChangeColumnOffset+GMFCSLevelInt-1, CheckProgress.centileChangeRowOffset, CheckProgress.centileChangeRowOffset+CheckProgress.numTests), CheckProgress.upperCentileChangeSheet.col_slice(CheckProgress.centileChangeColumnOffset+GMFCSLevelInt-1, CheckProgress.centileChangeRowOffset, CheckProgress.centileChangeRowOffset+CheckProgress.numTests)]
 
-        percentiles = CheckProgress.getPercentiles(GMFCSLevel, age, scores, centileChange) 
-        progress = CheckProgress.getProgress(GMFCSLevel, percentiles, centileChange) 
+        percentiles = CheckProgress.getPercentiles(GMFCSLevel, age, scores, centileChange, GMFCSLevelInt <= 3) 
+        progress = CheckProgress.getProgress(GMFCSLevel, percentiles, centileChange, GMFCSLevelInt <= 3) 
 
         # Reorder to match output in excel
         scores = CheckProgress.changeArrayOrder(scores, CheckProgress.mapForOutput)
@@ -131,9 +131,12 @@ class CheckProgress:
                 return startAndEnd
 
     # Gets all percentile values for all tests for both current and past checkups
-    def getPercentiles(GMFCSLevel, age, scores, centileChange):
+    def getPercentiles(GMFCSLevel, age, scores, centileChange, smwt):
         percentiles = []
-        for testIndex in range(CheckProgress.numTests):
+        testNumbers = range(CheckProgress.numTests)
+        if(not smwt):
+            del testNumbers[1]
+        for testIndex in testNumbers:
             sheetName = CheckProgress.testNamesForSheets[testIndex]+"_Level_"+GMFCSLevel
             sheet = CheckProgress.workbook.sheet_by_name(sheetName)
             
@@ -182,10 +185,12 @@ class CheckProgress:
 
     # Return 2D array, first dimension corresponds to tests and second contains potential range of "less, as, or greater"
     # Array is ordered the same as the testNamesForSheets
-    def getProgress(GMFCSLevel, percentiles, centileChange):
+    def getProgress(GMFCSLevel, percentiles, centileChange, smwt):
         progress = []
-
-        for testIndex in range(CheckProgress.numTests):
+        testNumbers = range(CheckProgress.numTests)
+        if(not smwt):
+            del testNumbers[1]
+        for testIndex in testNumbers:
 
             # Get potential range of difference
             pastPercentile = percentiles[testIndex][0]
