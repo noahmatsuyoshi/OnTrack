@@ -53,26 +53,6 @@ class Results2(PDFTemplateView):
             date=datetime.datetime.now()
         )
 
-class Results3(PDFTemplateView):
-    template_name = 'calculate.html'
-    filename = None
-
-    def dispatch(self, request, *args, **kwargs):
-        self.results = request.session.get('results')
-        self.age = request.session.get('age')
-        self.GMFCSLevel = request.session.get('GMFCSLevel')
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        return super(Results1, self).get_context_data(
-            pagesize='A4',
-            results = self.results,
-            age=self.age,
-            GMFCSLevel=self.GMFCSLevel,
-            #name=self.name,
-            date=datetime.datetime.now()
-        )
-
 class GraphsView(PDFTemplateView):
     template_name = 'graphs.html'
     filename = None
@@ -146,6 +126,9 @@ def graphs(request):
     return render(request, 'graphs.html', {'title': ': Graphs'})
 
 def resultsHome(request):
+    return render(request, 'resultsHome.html', {'title': ': Results '})
+
+""" def resultsHome(request):
     GMFCSLevel = request.session.get('GMFCSLevel')
     previousAgeYear = int(request.session.get('previousAgeYear'))
     previousAgeMonth = int(request.session.get('previousAgeMonth'))
@@ -236,4 +219,4 @@ def resultsHome(request):
     request.session['percentiles'] = percentiles
     request.session['results'] = results
 
-    return render(request, 'resultsHome.html', {'title': ': Results'})
+    return render(request, 'resultsHome.html', {'title': ': Results'}) """
