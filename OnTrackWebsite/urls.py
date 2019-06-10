@@ -13,6 +13,6 @@ urlpatterns = [
     path('resultsHome/', views.resultsHome, name='OnTrack-results'),
     path('results1/', views.Results1.as_view(), name='Check Up (Visuals)'),
     path('results2/', views.Results2.as_view(), name='Check Up (Scores)'),
-    path('graphs/', views.GraphsView.as_view(), name='Check Up (Graphs)'),
+    path('graphs/', views.graphs, name='Check Up (Graphs)'),
 
 ]

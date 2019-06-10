@@ -62,7 +62,7 @@ class GraphsView(PDFTemplateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        return super(Graphs, self).get_context_data(
+        return super(GraphsView, self).get_context_data(
             pagesize='A4',
             graphs = self.graphs
         )
@@ -123,12 +123,9 @@ def how_it_calculates(request):
     return render(request, 'OnTrackWebsite/how_it_calculates.html', {'title': ': how it calculates'})
 
 def graphs(request):
-    return render(request, 'graphs.html', {'title': ': Graphs'})
+    return render(request, 'graphs.html', {'graphs': request.session.get('graphs')})
 
 def resultsHome(request):
-    return render(request, 'resultsHome.html', {'title': ': Results '})
-
-""" def resultsHome(request):
     GMFCSLevel = request.session.get('GMFCSLevel')
     previousAgeYear = int(request.session.get('previousAgeYear'))
     previousAgeMonth = int(request.session.get('previousAgeMonth'))
@@ -216,7 +213,7 @@ def resultsHome(request):
     request.session['graphs'] = graphs
     request.session['progress'] = progress
     request.session['scores'] = scores
-    request.session['percentiles'] = percentiles
+    #request.session['percentiles'] = percentiles
     request.session['results'] = results
 
-    return render(request, 'resultsHome.html', {'title': ': Results'}) """
+    return render(request, 'resultsHome.html', {'title': ': Results'}) 

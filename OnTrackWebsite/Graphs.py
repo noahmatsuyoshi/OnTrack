@@ -39,15 +39,11 @@ class Graphs:
             levelChoices.append("Your result")
             pylab.legend(levelChoices)
             #pylab.show()
-
-            buffer = BytesIO()
-            canvas = pylab.get_current_fig_manager().canvas
-            canvas.draw()
-            pilImage = PIL.Image.frombytes("RGB", canvas.get_width_height(), canvas.tostring_rgb())
-            pilImage.save(buffer, "PNG")
-            pylab.close()
-            img_str = base64.b64encode(buffer.getvalue())
-            return img_str
+            buffer = BytesIO(b"")
+            pylab.savefig(buffer, format='jpg')
+            buffer.seek(0)
+            img_str = base64.b64encode(buffer.read()).decode("utf-8")
+            return 'data:image/jpg;base64, ' + img_str
 
     def createPercentileGraph(testName, GMFCSLevelInt, previousAge, previousScore, currentAge, currentScore, percentileChoices=None):
         with open("OnTrackWebsite/graphData/" + testName + "_level" + str(GMFCSLevelInt) + ".csv") as data:
@@ -86,23 +82,21 @@ class Graphs:
             pylab.legend(stringKeys)
             #pylab.show()
 
-            buffer = BytesIO()
-            canvas = pylab.get_current_fig_manager().canvas
-            canvas.draw()
-            pilImage = PIL.Image.frombytes("RGB", canvas.get_width_height(), canvas.tostring_rgb())
-            pilImage.save(buffer, "PNG")
-            pylab.close()
-            img_str = base64.b64encode(buffer.getvalue())
-            return img_str
+            buffer = BytesIO(b"")
+            pylab.savefig(buffer, format='jpg')
+            buffer.seek(0)
+            img_str = base64.b64encode(buffer.read()).decode("utf-8")
+            return 'data:image/jpg;base64, ' + img_str
 
     def getAllGraphs(GMFCSLevelInt, age, scores):
-        result = {}
+        result = []
         testNamesForSheets = ["ECAB", "SMWT", "SAROMM", "CEDLpar", "CEDLsc", "EASE", "FSA", "HEALTH", "GMFM"]
         testNumbers = range(len(testNamesForSheets))
         if(scores[1][0] == None):
             del testNumbers[1]
         for testIndex in testNumbers:
-            result[testNamesForSheets[testIndex]] = [Graphs.createAllLevelsGraph(testNamesForSheets[testIndex], GMFCSLevelInt, age[0], scores[testIndex][0], age[1], scores[testIndex][1], Graphs.levelChoices), Graphs.createPercentileGraph(testNamesForSheets[testIndex], GMFCSLevelInt, age[0], scores[testIndex][0], age[1], scores[testIndex][1], Graphs.percentileChoices)]
+            result.append([Graphs.createAllLevelsGraph(testNamesForSheets[testIndex], GMFCSLevelInt, age[0], scores[testIndex][0], age[1], scores[testIndex][1], Graphs.levelChoices), Graphs.createPercentileGraph(testNamesForSheets[testIndex], GMFCSLevelInt, age[0], scores[testIndex][0], age[1], scores[testIndex][1], Graphs.percentileChoices)])
+        result = CheckProgress.changeArrayOrder(result, CheckProgress.mapForOutput)
         return result
 
 
