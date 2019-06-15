@@ -4,6 +4,7 @@ from .forms import Firstinput
 from django.http import HttpResponseRedirect
 from .forms import Secondinput1
 from .forms import Secondinput2
+from .forms import NotesInput
 import io
 from django.http import FileResponse
 from django.conf import settings
@@ -12,23 +13,42 @@ from OnTrackWebsite.CheckProgress import CheckProgress
 from django.views.generic.base import TemplateView
 import datetime
 from OnTrackWebsite.Graphs import Graphs
+from django import forms
 
-class Results1(PDFTemplateView):
-    template_name = 'calculate.html'
+def Results1(request):
+    if request.method == 'POST':
+        form = NotesInput(request.POST)
+        if form.is_valid():
+            request.session['notes'] = form.cleaned_data
+            return HttpResponseRedirect('/results1PDF/')     
+    else:
+        form = NotesInput()
+    return render(request, 'calculate.html', {
+        "results": request.session.get("results"),
+        "age": request.session.get("age"),
+        "GMFCSLevel": request.session.get("GMFCSLevel"),
+        "date": datetime.datetime.now(),
+        "form": form
+    })
+
+class Results1PDF(PDFTemplateView):
+    template_name = 'calculatePDF.html'
     filename = None
 
     def dispatch(self, request, *args, **kwargs):
         self.results = request.session.get('results')
         self.age = request.session.get('age')
         self.GMFCSLevel = request.session.get('GMFCSLevel')
+        self.notes = request.session.get('notes')
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        return super(Results1, self).get_context_data(
+        return super(Results1PDF, self).get_context_data(
             pagesize='A4',
             results = self.results,
             age=self.age,
             GMFCSLevel=self.GMFCSLevel,
+            notes=self.notes,
             #name=self.name,
             date=datetime.datetime.now()
         )
@@ -44,7 +64,7 @@ class Results2(PDFTemplateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        return super(Results1, self).get_context_data(
+        return super(Results2, self).get_context_data(
             pagesize='A4',
             results = self.results,
             age=self.age,
@@ -157,55 +177,64 @@ def resultsHome(request):
             "progress": progress[0],
             "title": "Balance",
             "description": "Early Clinical Assessment of Balance. Scored from 0 to 100 (higher score = better balance).",
-            "score": scores[0]
+            "score": scores[0],
+            "name": "ECAB"
         },
         {
             "progress": progress[1],
             "title": "Strength",
             "description": "Functional Strength Assessment. Scored from 1 to 5 (higher score = stronger).",
-            "score": scores[1]
+            "score": scores[1],
+            "name": "FSA"
         },
         {
             "progress": progress[2],
             "title": "Range of Motion",
             "description": "Spinal Alignment and Range of Motion Measure. Scored from 0 to 4 (lower score = fewer limitations).",
-            "score": scores[2]
+            "score": scores[2],
+            "name": "SAROMM"
         },
         {
             "progress": progress[3],
             "title": "Endurance",
             "description": "6-Minute Walk Test. Scored in feet (higher score = further distance).",
-            "score": scores[3]
+            "score": scores[3],
+            "name": "SMWT"
         },
         {
             "progress": progress[4],
             "title": "Endurance",
             "description": "Early Activity Scale for Endurance. Scored from 1 to 5 (higher score = more endurance).",
-            "score": scores[4]
+            "score": scores[4],
+            "name": "EASE"
         },
         {
             "progress": progress[5],
             "title": "Overall Health",
             "description": "Child Health Conditions Questionnaire. Scored from 0 to 7 (lower score = better overall health).",
-            "score": scores[5]
+            "score": scores[5],
+            "name": "HEALTH"
         },
         {
             "progress": progress[6],
             "title": "Participation in Family and Recreational Activities",
             "description": "Child Engagement in Daily Life Measure. Scored from 1 to 5 (higher score = more participation).",
-            "score": scores[6]
+            "score": scores[6],
+            "name": "CEDLpar"
         },
         {
             "progress": progress[7],
             "title": "Performance in Self-Care Activities",
             "description": "Child Engagement in Daily Life Measure. Scored from 1 to 5 (higher score = needs less help).",
-            "score": scores[7]
+            "score": scores[7],
+            "name": "CEDLsc"
         },
         {
             "progress": progress[8],
             "title": "Gross Motor Function Measure",
             "description": "Gross Motor Function Measure, Scored from 0 to 100 ( higher score = greater function).",
-            "score": scores[8]
+            "score": scores[8],
+            "name": "GMFM"
         },
     ]
     request.session['GMFCSLevel'] = GMFCSLevel

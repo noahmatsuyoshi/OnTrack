@@ -71,3 +71,21 @@ class Secondinput2(forms.Form):
     HEALTH2 = forms.FloatField(min_value= 0, max_value = 7, label='Overall health current score:')
     GMFM1 = forms.FloatField(min_value= 0, max_value = 100, label='Gross motor function past score:')
     GMFM2 = forms.FloatField(min_value= 0, max_value = 100, label='Gross motor function current score:')
+
+class NotesInput(forms.Form):
+    
+    ECAB = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    SMWT = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    SAROMM = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    CEDLpar = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    CEDLsc = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    EASE = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    FSA = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    HEALTH = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    GMFM = forms.CharField(widget=forms.Textarea,label='Notes',required=False)
+    
+
+    """ def __init__(self, *args, **kwargs):
+        for index in range(9):
+            self.notes.append(forms.CharField(label='Notes'))
+        return super().__init__(*args, **kwargs) """

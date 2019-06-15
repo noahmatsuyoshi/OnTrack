@@ -73,10 +73,7 @@
 {% endblock %}
 
 {% block content %}
-  
-<div id="content">
-    <form action="/results1/" method="post">
-    {% csrf_token %}  
+    <div id="content">
         <div class="main">
             <div style="width: 100%">
                 <h1 class="title" style="padding: 5px 5px 0px">
@@ -92,7 +89,7 @@
             <table>
                 <tr>
                     <th class="info">
-                    
+                      
                         <p class="descriptionText" style="padding: 0px 5px 0px"> Age: {{ age.1.0 }} years and {{ age.1.1 }} months </p>
                         <p class="descriptionText" style="padding: 0px 5px 0px"> GMFCS: {{ GMFCSLevel }} </p>
                         <p class="descriptionText" style="padding: 0px 5px 5px"> Date: {{ date.month }}/{{ date.day }}/{{ date.year }} </p>
@@ -144,9 +141,9 @@
                         </td>
                         <td class="title">
                             {% with name=row.name %}
-                                {% for field in form %}
-                                    {% ifequal name field.html_name %}
-                                        {{field}}
+                                {% for key, value in notes.items %}
+                                    {% ifequal name key %}
+                                        {{value}}
                                     {% endifequal %}
                                 {% endfor %}
                             {% endwith %}
@@ -156,9 +153,5 @@
                 {% endfor %}
             </table>
         </div>
-        <input type="submit" style="font-weight: bold" value=  "Save PDF">
-        </input>
-    </form>
-</div>
-
+    </div>
 {% endblock %}
